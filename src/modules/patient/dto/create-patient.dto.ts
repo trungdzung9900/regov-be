@@ -1,6 +1,6 @@
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
-export class CreatePatientDrabDto {
+export class CreatePatientDto {
   @IsString()
   phone_number: string;
 
