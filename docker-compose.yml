@@ -1,0 +1,36 @@
+version: "3"
+services:
+  app:
+    # container_name: tmrnd-nestjs
+    image: harbor.ocp.tmrnd.com.my/nestjs-api/tmrnd-nestjs:latest
+
+    # build:
+    #   context: .
+    #   dockerfile: ./Dockerfile
+    ports:
+      - 5000:5000
+
+    restart: unless-stopped
+    # command: npm run start:dev
+    env_file:
+      - .env
+    networks:
+      - nestjs-network
+    volumes: 
+      - ./coverage:/app/coverage
+
+      # - ./coverage:/app/coverage
+  mongodb:
+    image: mongo
+    container_name: infra-mongodb
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    ports:
+      - 27017:27017
+    
+
+networks:
+  nestjs-network:
+    driver: bridge
