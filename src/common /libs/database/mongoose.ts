@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 
-export class MongooseRepository<TModel extends mongoose.Document> {
+export class MongooseRepository<TModel> {
   public TSchema: mongoose.Model<TModel>;
 
   constructor(_TSchema: mongoose.Model<TModel>) {

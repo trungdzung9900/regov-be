@@ -1,46 +1,40 @@
 import { MongooseModule, Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Transform, Type } from 'class-transformer';
-import { Document, ObjectId, SchemaTypes } from 'mongoose';
-import { Patient } from './entities/patient.entity';
 
-export type PatientDocument = Patient & Document;
+import { Exclude, Transform } from 'class-transformer';
+import { ObjectId } from 'mongoose';
+import PatientStatus from 'src/common /enum/patient.status.enum';
+import Role from 'src/common /enum/role.enum';
+
+export type PatientDocument = Patient;
 @Schema({
   versionKey: false,
   collection: 'patient',
 })
-export class Company {
+export class Patient {
   @Transform(({ value }) => value.toString())
-  _id: ObjectId;
+  @Exclude()
+  _id?: ObjectId;
+
+  @Prop({ required: true })
+  email: string;
+
+  @Prop({ required: true })
+  phone_number: string;
+
+  @Prop({ required: true })
+  password: string;
 
   @Prop()
-  company_name: string;
+  status: PatientStatus;
 
   @Prop()
-  company_address: string;
+  role?: Role;
 
   @Prop()
-  company_email: string;
-
-  @Prop()
-  company_contact_no: string;
-
-  @Prop()
-  company_contact_person: string;
-
-  @Prop()
-  subscribed_date: string;
-
-  @Prop()
-  component: ComponentValue;
-
-  @Prop({
-    type: [{ type: SchemaTypes.ObjectId, ref: Component.name }],
-  })
-  @Type(() => Component)
-  component_id: Component;
+  salt?: string;
 }
 
-export const CompanySchema = SchemaFactory.createForClass(Company);
+export const PatientSchema = SchemaFactory.createForClass(Patient);
 export default MongooseModule.forFeature([
-  { name: Company.name, schema: CompanySchema },
+  { name: Patient.name, schema: PatientSchema },
 ]);

@@ -3,9 +3,9 @@ import { AppController } from './app.controller';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from '@hapi/joi';
 import { AppService } from './app.service';
-import { DatabaseModule } from './config/database.module';
 import { AdminModule } from './modules/admin/admin.module';
 import { PatientModule } from './modules/patient/patient.module';
+import { DatabaseModule } from './config/database.module';
 
 @Module({
   imports: [
