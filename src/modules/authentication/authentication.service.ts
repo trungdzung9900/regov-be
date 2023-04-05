@@ -15,7 +15,7 @@ export class AuthenticationService {
     let isPasswordValid: boolean;
     let patient;
     if (phone_number) {
-      const patientFound = await this.patientService.findPatient({
+      const patientFound = await this.patientService.findOnePatient({
         phone_number: phone_number,
       });
       if (!patientFound) {
@@ -28,7 +28,7 @@ export class AuthenticationService {
       patient = { ...patientFound };
     }
     if (email) {
-      const patientFound = await this.patientService.findPatient({
+      const patientFound = await this.patientService.findOnePatient({
         email: email,
       });
       if (!patientFound) {
@@ -43,7 +43,7 @@ export class AuthenticationService {
     if (!isPasswordValid) {
       throw new HttpException('Wrong Password', HttpStatus.NOT_FOUND);
     }
-    console.log('patient', patient);
-    return this.helper.generateToken(patient);
+    // return this.helper.generateToken(patient);
+    return 'Login Success';
   }
 }

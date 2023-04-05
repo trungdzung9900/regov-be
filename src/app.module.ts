@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { AdminModule } from './modules/admin/admin.module';
 import { PatientModule } from './modules/patient/patient.module';
 import { DatabaseModule } from './config/database.module';
+import { GroupModule } from './modules/group/group.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { DatabaseModule } from './config/database.module';
     AdminModule,
     PatientModule,
     DatabaseModule,
+    GroupModule,
   ],
   controllers: [AppController],
   providers: [AppService],

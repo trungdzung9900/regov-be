@@ -17,7 +17,6 @@ import { MongooseModule } from '@nestjs/mongoose';
           schema.pre('save', async function () {
             if (this.password) {
               const salt = await bcrypt.genSalt();
-              console.log('salt', salt);
               const hash = await bcrypt.hash(this.password, salt);
               this.password = hash;
               this.salt = salt;

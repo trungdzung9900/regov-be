@@ -1,26 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { CreateAdminDto } from './dto/create-admin.dto';
-import { UpdateAdminDto } from './dto/update-admin.dto';
+import { PatientService } from '../patient/patient.service';
+import { AddChildrenDto } from './dto/add-children-admin.dto';
 
 @Injectable()
 export class AdminService {
-  create(createAdminDto: CreateAdminDto) {
-    return 'This action adds a new admin';
+  constructor(private readonly patientService: PatientService) {}
+
+  async addChildren(id: string, addChildrenDto: AddChildrenDto) {
+    const { children } = addChildrenDto;
+    return this.patientService.addChild(id, children);
   }
 
-  findAll() {
-    return `This action returns all admin`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} admin`;
-  }
-
-  update(id: number, updateAdminDto: UpdateAdminDto) {
-    return `This action updates a #${id} admin`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} admin`;
+  async findAllPatient() {
+    return this.patientService.findPatient();
   }
 }

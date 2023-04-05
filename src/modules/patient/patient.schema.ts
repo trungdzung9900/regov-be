@@ -28,7 +28,13 @@ export class Patient {
   status: PatientStatus;
 
   @Prop()
+  otp_code?: string;
+
+  @Prop()
   role?: Role;
+
+  @Prop()
+  children?: [];
 
   @Prop()
   salt?: string;

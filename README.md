@@ -25,6 +25,27 @@
 ## Description
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Be side that I use the Mongoose and Mongodb to build database.</br>
+<a>My idea to work on this project is:</a></br>
+- We device systems to 3 main database: ADMIN, PATIENT, GROUP </br>
+- We device systems to 4 main module: ADMIN, PATIENT, GROUP, AUTH </br>
+- For the test requirement: </br>
+   
+  1. The patient would only provide personal credentials for the lab technican to help setup the account</br>
+  2. The patient should be able to provide OTP via mobile, email, or other MFA devices during sign up</br>
+  3. Administrator should be able to register new patient and add patient in a group</br>
+  4. Administrator should be able to add an infant or child to parents record / account</br>
+  5. Administrator should be able to search patient records</br>
+  6. The system must prevent multiple sign in with the same login credentials</br>
+- I have cover from 1 to 5 with this list of api:
+  1.  [POST]localhost:3000/patient/create </br>
+  2.  [POST]localhost:3000/auth/login </br>
+  3.  [POST]localhost:3000/patient/generate-otp</br>
+  4.  [POST]localhost:3000/patient/verify-otp</br>
+  5.  [POST]localhost:3000/group/create</br>
+  6.  [POST]localhost:3000/group/add-patient/:groupId</br>
+  7.  [POST]localhost:3000/admin/add-children/:patientId</br>
+  8.  [GET]localhost:3000/admin/patients</br>
 
 ## Installation
 
@@ -35,14 +56,17 @@ $ npm install
 ## Running the app
 
 ```bash
+# first step
+$ docker-compose up (which will start the Posgrest SQL sever)
+
 # development
-$ npm run start
+$ yarn run start
 
 # watch mode
-$ npm run start:dev
+$ yarn run start:dev
 
 # production mode
-$ npm run start:prod
+$ yarn run start:prod
 ```
 
 ## Test
